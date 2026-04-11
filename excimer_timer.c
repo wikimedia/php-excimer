@@ -41,9 +41,9 @@ static void excimer_timer_interrupt(zend_execute_data *execute_data);
  * Add a timer to the pending list. Unsynchronised, i.e. the caller is
  * responsible for locking the mutex if required.
  */
-static void excimer_timer_list_enqueue(excimer_timer *timer)
+static void excimer_timer_list_enqueue(excimer_timer *timer, excimer_timer_tls_t *tls)
 {
-	excimer_timer **head_pp = &excimer_timer_tls.pending_head;
+	excimer_timer **head_pp = &tls->pending_head;
 	if (!timer->pending_next) {
 		if (*head_pp) {
 			timer->pending_next = *head_pp;
@@ -259,10 +259,11 @@ void excimer_timer_destroy(excimer_timer *timer)
 static void excimer_timer_handle(void * data, int overrun_count)
 {
 	excimer_timer *timer = (excimer_timer*)data;
-	excimer_mutex_lock(&excimer_timer_tls.mutex);
+	excimer_timer_tls_t *tls = timer->tls;
+	excimer_mutex_lock(&tls->mutex);
 	timer->event_count += overrun_count + 1;
-	excimer_timer_list_enqueue(timer);
-	excimer_mutex_unlock(&excimer_timer_tls.mutex);
+	excimer_timer_list_enqueue(timer, tls);
+	excimer_mutex_unlock(&tls->mutex);
 	excimer_timer_atomic_bool_store(timer->vm_interrupt_ptr, 1);
 }
 
