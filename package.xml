@@ -25,10 +25,10 @@
   <email>krinkle@fastmail.com</email>
   <active>yes</active>
  </lead>
- <date>2025-05-19</date>
+ <date>2026-04-16</date>
  <version>
-  <release>1.2.5</release>
-  <api>1.2.5</api>
+  <release>1.2.6</release>
+  <api>1.2.6</api>
  </version>
  <stability>
   <release>stable</release>
@@ -36,7 +36,9 @@
  </stability>
  <license uri="https://www.apache.org/licenses/LICENSE-2.0" filesource="LICENSE">Apache 2.0</license>
  <notes>
-  - Fix build error with libtool 1.5
+  - Fix ZTS mode, as used by FrankenPHP
+  - Fix memory leak in excimer_log_get_speedscope_data
+  - Fix test failure in PHP 8.4
  </notes>
  <contents>
   <dir name="/">
@@ -103,6 +105,16 @@
  <providesextension>excimer</providesextension>
  <extsrcrelease />
  <changelog>
+   <release>
+     <date>2025-05-19</date>
+     <version>
+      <release>1.2.5</release>
+      <api>1.2.5</api>
+     </version>
+     <notes>
+      - Fix build error with libtool 1.5
+     </notes>
+   </release>
    <release>
     <date>2025-05-19</date>
     <version>
