@@ -1,0 +1,21 @@
+{
+	"name": "wikimedia/excimer",
+	"description": "Excimer is a PHP extension which provides a low-overhead interrupting timer and sampling profiler.",
+	"type": "php-ext",
+	"license": "Apache-2.0",
+	"authors": [
+		{
+			"name": "Tim Starling",
+			"email": "tstarling@wikimedia.org"
+		},
+		{
+			"name": "Timo Tijhof"
+		},
+		{
+			"name": "Kunal Mehta"
+		}
+	],
+	"php-ext": {
+		"extension-name": "excimer"
+	}
+}
